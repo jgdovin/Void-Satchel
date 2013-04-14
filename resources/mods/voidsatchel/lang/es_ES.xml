@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Archivo de Lenguage en Español (ES)</comment>
+	<!-- Items -->
+	<entry key="item.voidSatchel.name">Morral Vacío</entry>
+	<!-- Tile Entities -->
+	<entry key="container.voidSatchel">Morral Vacío</entry>
+</properties>

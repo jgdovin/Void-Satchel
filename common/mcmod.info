@@ -1,0 +1,18 @@
+[
+{
+  "modid": "voidsatchel",
+  "name": "Void Satchel"
+  "description": "A mod to add a Void Satchel to minecraft.",
+  "credits": "By jgdovin, Special thanks to captain_shadows for helping me get this started and working through my derps with me :)",
+  "logoFile": "/mods/voidsatchel/textures/logo.png",
+  "version": "1",
+  "mcversion": "1.5.1",
+  "url": "",
+  "updateUrl": "",
+  "authors": [ "jgdovin" ],
+  "screenshots": [ "" ],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+}
+]
