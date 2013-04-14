@@ -2,12 +2,14 @@ package jgdovin.voidsatchel.items;
 
 import jgdovin.voidsatchel.VoidSatchel;
 import jgdovin.voidsatchel.utils.Archive;
+import jgdovin.voidsatchel.utils.FunctionHelper;
 import jgdovin.voidsatchel.utils.NBTHelper;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -20,22 +22,29 @@ public class ItemVoidSatchel extends Item {
         super(id);
         setCreativeTab(CreativeTabs.tabTools);
     }
-
     @Override
-    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
+    public boolean getShareTag() {
 
-        if (!world.isRemote){
-            if (itemStack.hasDisplayName()){
-                this.setCustomName(itemStack.getDisplayName());
-            }
-            NBTHelper.setBoolean(itemStack, Archive.NBT_ITEM_VOID_SATCHEL_GUI_OPEN, true);
-            entityPlayer.openGui(VoidSatchel.instance, Archive.voidSatchelGUID,
-                    entityPlayer.worldObj, (int) entityPlayer.posX, (int) entityPlayer.posY,
-                    (int) entityPlayer.posZ);
+        return true;
+    }
+    @Override
+    public ItemStack onItemRightClick(ItemStack itemStack, World world,
+            EntityPlayer entityPlayer) {
+
+        if (itemStack.hasDisplayName()) {
+            this.setCustomName(itemStack.getDisplayName());
         }
-
+        NBTHelper.setBoolean(itemStack,
+        Archive.NBT_ITEM_VOID_SATCHEL_GUI_OPEN, true);
+        entityPlayer.openGui(VoidSatchel.instance, Archive.voidSatchelGUID,
+                entityPlayer.worldObj, (int) entityPlayer.posX,
+                (int) entityPlayer.posY, (int) entityPlayer.posZ);
+        
+        
+        
         return itemStack;
     }
+    
 
     public void setCustomName(String customName) {
         this.customName = customName;
@@ -53,6 +62,7 @@ public class ItemVoidSatchel extends Item {
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconRegister) {
         itemIcon = iconRegister.registerIcon(Archive.texture
-                + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
+                + this.getUnlocalizedName().substring(
+                        this.getUnlocalizedName().indexOf(".") + 1));
     }
 }

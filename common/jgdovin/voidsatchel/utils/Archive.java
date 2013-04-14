@@ -20,6 +20,10 @@ public class Archive {
     public static final String gui = "/mods/" + id + "/textures/gui/";
     public static final String lang = "/mods/" + id + "/lang/";
     public static final String guiVoid = gui + "guiVoid.png";
+    public static final String proxy = "jgdovin." + id + ".sided.";
+    public static final String clientProxy = proxy + "ClientProxy";
+    public static final String commonProxy = proxy + "CommonProxy";
+    
 
     /*
      * ******************************************************************
