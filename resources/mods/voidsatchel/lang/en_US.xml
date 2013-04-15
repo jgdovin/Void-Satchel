@@ -3,7 +3,7 @@
 <properties version="1.0">
 	<comment>English (US) Language File</comment>
 	<!-- Items -->
-	<entry key="item.voidBag.name">Void Bag</entry>
+	<entry key="item.voidSatchel.name">Void Satchel</entry>
 	<!-- Tile Entities -->
-	<entry key="container.voidBag">Void Bag</entry>
+	<entry key="container.voidSatchel">Void Satchel</entry>
 </properties>

@@ -3,7 +3,7 @@
 <properties version="1.0">
 	<comment>Archivo de Lenguage en Español (ES)</comment>
 	<!-- Items -->
-	<entry key="item.voidBag.name">Morral Vacío</entry>
+	<entry key="item.voidSatchel.name">Morral Vacío</entry>
 	<!-- Tile Entities -->
-	<entry key="container.voidBag">Morral Vacío</entry>
+	<entry key="container.voidSatchel">Morral Vacío</entry>
 </properties>
