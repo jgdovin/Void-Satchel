@@ -77,43 +77,42 @@ public class ContainerVoidSatchel extends Container {
         }
         this.detectAndSendChanges();
         ItemStack currBag = FunctionHelper.getCurrentBag(player);
-        inv.writeBagContents(currBag);
+        //inv.writeBagContents(currBag);
 
     }
 
     @Override
     public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slotIndex) {
-        ItemStack newItemStack = null;
-        ItemStack stack = null;
-        Slot slot = (Slot) inventorySlots.get(slotIndex);
-        if ((slot == null) || !slot.getHasStack()){
-            return null;
-        }
-        stack = slot.getStack();
-        newItemStack = stack.copy();
-        if (FunctionHelper.getCurrentBag(entityPlayer) == stack){
-            return null;
-        }
-        if (slot.inventory instanceof InventoryVoidSatchel){
+        ItemStack itemstack = null;
+        Slot slot = (Slot)this.inventorySlots.get(slotIndex);
 
-            int start = getSlotFromInventory(plInv, 0).slotNumber;
-            if (!mergeItemStack(stack, start, (start + plInv.getSizeInventory()) - 4, true)){
+        if (slot != null && slot.getHasStack())
+        {
+            ItemStack itemstack1 = slot.getStack();
+            itemstack = itemstack1.copy();
+
+            if (slotIndex < 4 * 9)
+            {
+                if (!this.mergeItemStack(itemstack1, 4 * 9, this.inventorySlots.size(), true))
+                {
+                    return null;
+                }
+            }
+            else if (!this.mergeItemStack(itemstack1, 0, 4 * 9, false))
+            {
                 return null;
             }
 
-        }else{ // player Inv
-            int end = getSlotFromInventory(inv, 0).slotNumber + plInv.getSizeInventory();
-            if (!mergeItemStack(stack, 0, end, false)){
-                return null;
+            if (itemstack1.stackSize == 0)
+            {
+                slot.putStack((ItemStack)null);
+            }
+            else
+            {
+                slot.onSlotChanged();
             }
         }
 
-        if (stack.stackSize <= 0){
-            slot.putStack(null);
-        }else{
-            slot.onSlotChanged();
-        }
-
-        return newItemStack;
+        return itemstack;
     }
 }
