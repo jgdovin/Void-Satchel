@@ -15,12 +15,12 @@ public class ContainerVoidSatchel extends Container {
 
     private int rows = 3, cols = 9;
     private InventoryVoidSatchel inv;
-    private IInventory plInv = null;
+    //private IInventory plInv = null;
 
     public ContainerVoidSatchel(ItemStack stack, EntityPlayer ep) {
 
         inv = new InventoryVoidSatchel(stack);
-        plInv = ep.inventory;
+        //plInv = ep.inventory;
         addInventory(inv, 8, 18);
         addPlayerInventory(ep.inventory, 102);
 
@@ -76,7 +76,7 @@ public class ContainerVoidSatchel extends Container {
 
         }
         this.detectAndSendChanges();
-        ItemStack currBag = FunctionHelper.getCurrentBag(player);
+        //ItemStack currBag = FunctionHelper.getCurrentBag(player);
         //inv.writeBagContents(currBag);
 
     }
