@@ -15,8 +15,12 @@ public class InventoryVoidSatchel implements IInventory{
     private ItemStack[] inventory;
     private final int INVENTORY_SIZE = 13 * 3;
 
+        
     public InventoryVoidSatchel(ItemStack stack) {
         if(stack.getItem() != ModItems.voidSatchel) return;
+        
+        
+        
         boolean success = readFromNBT(stack.getTagCompound());
         if(!success)
             inventory = new ItemStack[INVENTORY_SIZE];
@@ -29,8 +33,7 @@ public class InventoryVoidSatchel implements IInventory{
 
     @Override
     public ItemStack getStackInSlot(int slot) {
-        return null;
-  //      return inventory[slot];
+          return inventory[slot];
     }
 
     @Override
@@ -50,6 +53,8 @@ public class InventoryVoidSatchel implements IInventory{
         return s;
     }
 
+ 
+    
     @Override
     public ItemStack getStackInSlotOnClosing(int slot ){
         if (inventory[slot] != null) {
@@ -101,7 +106,7 @@ public class InventoryVoidSatchel implements IInventory{
         return true;
     }
 
-    private static final String NBT_VOID_SATCHEL_INVENTORY = "alchemicalBagInventory";
+    private static final String NBT_VOID_SATCHEL_INVENTORY = "voidSatchelInventory";
 
     private boolean readFromNBT(NBTTagCompound tag) {
         if(tag == null || !tag.hasKey(NBT_VOID_SATCHEL_INVENTORY)) return false;
@@ -118,6 +123,26 @@ public class InventoryVoidSatchel implements IInventory{
     }
 
     public void writeBagContents(ItemStack item) {
+        NBTTagCompound tag = item.getTagCompound();
+        if(tag == null){
+            tag = new NBTTagCompound();
+            item.setTagCompound(tag);
+        }
+        NBTTagList list = new NBTTagList();
+        NBTTagCompound tagComp;
+        ItemStack stack;
+        for(int i = 0; i < inventory.length; i++) {
+            stack = inventory[i];
+            if(stack == null) continue;
+            tagComp = new NBTTagCompound();
+            tagComp.setByte("Slot", (byte)i);
+            stack.writeToNBT(tagComp);
+            list.appendTag( tagComp );
+        }
+        tag.setTag(NBT_VOID_SATCHEL_INVENTORY, list);
+    }
+    
+    public void  clearInventoryNBT(ItemStack item) {
         NBTTagCompound tag = item.getTagCompound();
         if(tag == null){
             tag = new NBTTagCompound();

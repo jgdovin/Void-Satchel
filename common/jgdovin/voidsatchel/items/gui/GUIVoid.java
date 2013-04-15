@@ -3,7 +3,6 @@ package jgdovin.voidsatchel.items.gui;
 import jgdovin.voidsatchel.items.ItemVoidSatchel;
 import jgdovin.voidsatchel.items.container.ContainerVoidSatchel;
 import jgdovin.voidsatchel.utils.Archive;
-import jgdovin.voidsatchel.utils.NBTHelper;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,13 +14,18 @@ import org.lwjgl.opengl.GL11;
 public class GUIVoid extends GuiContainer {
 
     private ItemVoidSatchel itemVoid;
+    private EntityPlayer voidPlayer;
+    private ItemStack itemStack;
 
     public GUIVoid(ItemStack stack, EntityPlayer player) {
 
         super(new ContainerVoidSatchel(stack, player));
         this.itemVoid = (ItemVoidSatchel) stack.getItem();
+        this.voidPlayer = player;
+        this.itemStack = stack;
         xSize = 180;
         ySize = 185;
+
     }
 
     @Override
@@ -30,18 +34,19 @@ public class GUIVoid extends GuiContainer {
         int x = (width - xSize) / 2, y = (height - ySize) / 2;
         int bw = xSize - 22;
 
-        buttonList
-                .add(new GuiButton(1, x + 104, y + 75, bw / 3, 20, "Destroy!"));
     }
 
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
-        fontRenderer.drawString(StatCollector.translateToLocal(itemVoid
+        fontRenderer.drawString("\u00a7f" + StatCollector.translateToLocal(itemVoid
                 .hasCustomName() ? itemVoid.getCustomName() : itemVoid
                 .getCustomName()), 8, 6, 4210752);
         fontRenderer.drawString(
-                StatCollector.translateToLocal(Archive.CONTAINER_INVENTORY), 9,
-                (ySize - 96) + 2, 4210752);
+                "\u00a7f" + StatCollector.translateToLocal(Archive.CONTAINER_INVENTORY), 15,
+                (ySize - 98) + 2, 4210752);
+        fontRenderer.drawStringWithShadow(
+                StatCollector.translateToLocal("\u00a76Items to Destroy"), 11,
+                (ySize - 112) + 2, 4210752);
     }
 
     @Override
@@ -59,16 +64,12 @@ public class GUIVoid extends GuiContainer {
 
         super.onGuiClosed();
 
-        if (mc.thePlayer != null) {
-            for (ItemStack itemStack : mc.thePlayer.inventory.mainInventory) {
-                if (itemStack != null) {
-                    if (NBTHelper.hasTag(itemStack,
-                            Archive.NBT_ITEM_VOID_SATCHEL_GUI_OPEN)) {
-                        NBTHelper.removeTag(itemStack,
-                                Archive.NBT_ITEM_VOID_SATCHEL_GUI_OPEN);
-                    }
-                }
-            }
-        }
     }
+
+    protected void actionPerformed(GuiButton guibutton) {
+        // id is the id you give your button
+
+    }
+    // Packet code here
+    // PacketDispatcher.sendPacketToServer(packet); //send packet
 }
