@@ -17,7 +17,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 
 @Mod(modid = Archive.id, name = Archive.name, version = Archive.ver)
-@NetworkMod(clientSideRequired = true, serverSideRequired = false, channels={"vSatchelPacket"}, packetHandler = PacketHandler.class)
+@NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = { "vSatchelPacket" }, packetHandler = PacketHandler.class)
 public class VoidSatchel {
 
     @Instance(Archive.id)
@@ -25,7 +25,7 @@ public class VoidSatchel {
 
     @SidedProxy(clientSide = Archive.clientProxy, serverSide = Archive.commonProxy)
     public static CommonProxy baseProxy;
-    
+
     @PreInit
     public void preInit(FMLPreInitializationEvent evt) {
 

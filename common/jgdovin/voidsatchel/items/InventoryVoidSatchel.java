@@ -7,23 +7,22 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
 /**
- *
  * @author Michael DeRuscio<https://github.com/Michael-073>
  */
-public class InventoryVoidSatchel implements IInventory{
+public class InventoryVoidSatchel implements IInventory {
 
     private ItemStack[] inventory;
     private final int INVENTORY_SIZE = 13 * 3;
 
-        
     public InventoryVoidSatchel(ItemStack stack) {
-        if(stack.getItem() != ModItems.voidSatchel) return;
-        
-        
-        
+        if (stack.getItem() != ModItems.voidSatchel){
+            return;
+        }
+
         boolean success = readFromNBT(stack.getTagCompound());
-        if(!success)
+        if (!success){
             inventory = new ItemStack[INVENTORY_SIZE];
+        }
     }
 
     @Override
@@ -33,18 +32,21 @@ public class InventoryVoidSatchel implements IInventory{
 
     @Override
     public ItemStack getStackInSlot(int slot) {
-          return inventory[slot];
+        return inventory[slot];
     }
 
     @Override
     public ItemStack decrStackSize(int slot, int num) {
         ItemStack stack = getStackInSlot(slot), s;
-        if(stack == null) return null;
-        if(stack.stackSize > num) {
+        if (stack == null){
+            return null;
+        }
+        if (stack.stackSize > num){
             s = stack.splitStack(num);
-            if(stack.stackSize <= 0)
+            if (stack.stackSize <= 0){
                 setInventorySlotContents(slot, null);
-        } else {
+            }
+        }else{
             s = stack;
             setInventorySlotContents(slot, null);
 
@@ -53,16 +55,15 @@ public class InventoryVoidSatchel implements IInventory{
         return s;
     }
 
- 
-    
     @Override
-    public ItemStack getStackInSlotOnClosing(int slot ){
-        if (inventory[slot] != null) {
+    public ItemStack getStackInSlotOnClosing(int slot) {
+        if (inventory[slot] != null){
             ItemStack itemstack = inventory[slot];
             this.inventory[slot] = null;
             return itemstack;
-        } else
+        }else{
             return null;
+        }
     }
 
     @Override
@@ -109,55 +110,62 @@ public class InventoryVoidSatchel implements IInventory{
     private static final String NBT_VOID_SATCHEL_INVENTORY = "voidSatchelInventory";
 
     private boolean readFromNBT(NBTTagCompound tag) {
-        if(tag == null || !tag.hasKey(NBT_VOID_SATCHEL_INVENTORY)) return false;
+        if ((tag == null) || !tag.hasKey(NBT_VOID_SATCHEL_INVENTORY)){
+            return false;
+        }
         NBTTagList tagList = tag.getTagList(NBT_VOID_SATCHEL_INVENTORY);
         inventory = new ItemStack[getSizeInventory()];
 
-        for(int i = 0; i < tagList.tagCount(); i++){
+        for (int i = 0; i < tagList.tagCount(); i++){
             NBTTagCompound t = (NBTTagCompound) tagList.tagAt(i);
             int slot = t.getByte("Slot");
-            if(slot >= 0 && slot < inventory.length)
+            if ((slot >= 0) && (slot < inventory.length)){
                 inventory[slot] = ItemStack.loadItemStackFromNBT(t);
+            }
         }
         return true;
     }
 
     public void writeBagContents(ItemStack item) {
         NBTTagCompound tag = item.getTagCompound();
-        if(tag == null){
+        if (tag == null){
             tag = new NBTTagCompound();
             item.setTagCompound(tag);
         }
         NBTTagList list = new NBTTagList();
         NBTTagCompound tagComp;
         ItemStack stack;
-        for(int i = 0; i < inventory.length; i++) {
+        for (int i = 0; i < inventory.length; i++){
             stack = inventory[i];
-            if(stack == null) continue;
+            if (stack == null){
+                continue;
+            }
             tagComp = new NBTTagCompound();
-            tagComp.setByte("Slot", (byte)i);
+            tagComp.setByte("Slot", (byte) i);
             stack.writeToNBT(tagComp);
-            list.appendTag( tagComp );
+            list.appendTag(tagComp);
         }
         tag.setTag(NBT_VOID_SATCHEL_INVENTORY, list);
     }
-    
-    public void  clearInventoryNBT(ItemStack item) {
+
+    public void clearInventoryNBT(ItemStack item) {
         NBTTagCompound tag = item.getTagCompound();
-        if(tag == null){
+        if (tag == null){
             tag = new NBTTagCompound();
             item.setTagCompound(tag);
         }
         NBTTagList list = new NBTTagList();
         NBTTagCompound tagComp;
         ItemStack stack;
-        for(int i = 0; i < inventory.length; i++) {
+        for (int i = 0; i < inventory.length; i++){
             stack = inventory[i];
-            if(stack == null) continue;
+            if (stack == null){
+                continue;
+            }
             tagComp = new NBTTagCompound();
-            tagComp.setByte("Slot", (byte)i);
+            tagComp.setByte("Slot", (byte) i);
             stack.writeToNBT(tagComp);
-            list.appendTag( tagComp );
+            list.appendTag(tagComp);
         }
         tag.setTag(NBT_VOID_SATCHEL_INVENTORY, list);
     }
