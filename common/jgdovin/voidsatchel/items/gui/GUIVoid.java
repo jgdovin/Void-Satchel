@@ -14,15 +14,11 @@ import org.lwjgl.opengl.GL11;
 public class GUIVoid extends GuiContainer {
 
     private ItemVoidSatchel itemVoid;
-    private EntityPlayer voidPlayer;
-    private ItemStack itemStack;
 
     public GUIVoid(ItemStack stack, EntityPlayer player) {
 
         super(new ContainerVoidSatchel(stack, player));
         this.itemVoid = (ItemVoidSatchel) stack.getItem();
-        this.voidPlayer = player;
-        this.itemStack = stack;
         xSize = 180;
         ySize = 185;
 
@@ -31,22 +27,21 @@ public class GUIVoid extends GuiContainer {
     @Override
     public void initGui() {
         super.initGui();
-        int x = (width - xSize) / 2, y = (height - ySize) / 2;
-        int bw = xSize - 22;
 
     }
 
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
-        fontRenderer.drawString("\u00a7f" + StatCollector.translateToLocal(itemVoid
-                .hasCustomName() ? itemVoid.getCustomName() : itemVoid
-                .getCustomName()), 8, 6, 4210752);
+        fontRenderer.drawString(
+                "\u00a7f"
+                        + StatCollector.translateToLocal(itemVoid.hasCustomName() ? itemVoid
+                                .getCustomName() : itemVoid.getCustomName()), 8, 6, 4210752);
         fontRenderer.drawString(
                 "\u00a7f" + StatCollector.translateToLocal(Archive.CONTAINER_INVENTORY), 15,
                 (ySize - 98) + 2, 4210752);
         fontRenderer.drawStringWithShadow(
-                StatCollector.translateToLocal("\u00a76Items to Destroy"), 11,
-                (ySize - 112) + 2, 4210752);
+                StatCollector.translateToLocal("\u00a7eItems to Destroy"), 11, (ySize - 112) + 2,
+                4210752);
     }
 
     @Override
@@ -66,6 +61,7 @@ public class GUIVoid extends GuiContainer {
 
     }
 
+    @Override
     protected void actionPerformed(GuiButton guibutton) {
         // id is the id you give your button
 

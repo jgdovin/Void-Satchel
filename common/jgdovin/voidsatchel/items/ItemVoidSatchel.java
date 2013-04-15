@@ -28,17 +28,14 @@ public class ItemVoidSatchel extends Item {
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack itemStack, World world,
-            EntityPlayer entityPlayer) {
+    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
 
-        if (itemStack.hasDisplayName()) {
+        if (itemStack.hasDisplayName()){
             this.setCustomName(itemStack.getDisplayName());
         }
-        NBTHelper.setBoolean(itemStack, Archive.NBT_ITEM_VOID_SATCHEL_GUI_OPEN,
-                true);
-        entityPlayer.openGui(VoidSatchel.instance, Archive.voidSatchelGUID,
-                entityPlayer.worldObj, (int) entityPlayer.posX,
-                (int) entityPlayer.posY, (int) entityPlayer.posZ);
+        NBTHelper.setBoolean(itemStack, Archive.NBT_ITEM_VOID_SATCHEL_GUI_OPEN, true);
+        entityPlayer.openGui(VoidSatchel.instance, Archive.voidSatchelGUID, entityPlayer.worldObj,
+                (int) entityPlayer.posX, (int) entityPlayer.posY, (int) entityPlayer.posZ);
 
         return itemStack;
     }
@@ -59,7 +56,6 @@ public class ItemVoidSatchel extends Item {
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconRegister) {
         itemIcon = iconRegister.registerIcon(Archive.texture
-                + this.getUnlocalizedName().substring(
-                        this.getUnlocalizedName().indexOf(".") + 1));
+                + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
     }
 }

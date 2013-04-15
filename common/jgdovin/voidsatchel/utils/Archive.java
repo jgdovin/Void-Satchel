@@ -9,7 +9,7 @@ public class Archive {
      */
     public static final String id = "voidsatchel";
     public static final String name = "Void Satchel";
-    public static final String ver = "1";
+    public static final String ver = "@VERSION@";
 
     /*
      * ******************************************************************
@@ -23,7 +23,6 @@ public class Archive {
     public static final String proxy = "jgdovin." + id + ".sided.";
     public static final String clientProxy = proxy + "ClientProxy";
     public static final String commonProxy = proxy + "CommonProxy";
-    
 
     /*
      * ******************************************************************
