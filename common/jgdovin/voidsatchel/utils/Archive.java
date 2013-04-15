@@ -29,7 +29,7 @@ public class Archive {
      * Void Satchel
      * ******************************************************************
      */
-    public static final String voidSatchel = "voidSatchel";
+    public static final String voidSatchel = "voidBag";
     public static final String containerVoidSatchel = "container." + voidSatchel;
     public static final int voidSatchelGUID = 0;
 
@@ -38,7 +38,7 @@ public class Archive {
      * NBT and GUI related things
      * ******************************************************************
      */
-    public static final String NBT_ITEM_VOID_SATCHEL_GUI_OPEN = "itemAlchemicalBagGuiOpen";
+    public static final String NBT_ITEM_VOID_SATCHEL_GUI_OPEN = "itemVoidBagGuiOpen";
     public static final String CONTAINER_INVENTORY = "container.inventory";
 
     /*
