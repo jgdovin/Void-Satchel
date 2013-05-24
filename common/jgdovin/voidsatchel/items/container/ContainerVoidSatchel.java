@@ -15,12 +15,13 @@ public class ContainerVoidSatchel extends Container {
 
     private int rows = 3, cols = 9;
     private InventoryVoidSatchel inv;
-    //private IInventory plInv = null;
+
+    // private IInventory plInv = null;
 
     public ContainerVoidSatchel(ItemStack stack, EntityPlayer ep) {
 
         inv = new InventoryVoidSatchel(stack);
-        //plInv = ep.inventory;
+        // plInv = ep.inventory;
         addInventory(inv, 8, 18);
         addPlayerInventory(ep.inventory, 102);
 
@@ -76,39 +77,31 @@ public class ContainerVoidSatchel extends Container {
 
         }
         this.detectAndSendChanges();
-        //ItemStack currBag = FunctionHelper.getCurrentBag(player);
-        //inv.writeBagContents(currBag);
+        // ItemStack currBag = FunctionHelper.getCurrentBag(player);
+        // inv.writeBagContents(currBag);
 
     }
 
     @Override
     public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slotIndex) {
         ItemStack itemstack = null;
-        Slot slot = (Slot)this.inventorySlots.get(slotIndex);
+        Slot slot = (Slot) this.inventorySlots.get(slotIndex);
 
-        if (slot != null && slot.getHasStack())
-        {
+        if ((slot != null) && slot.getHasStack()){
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if (slotIndex < 4 * 9)
-            {
-                if (!this.mergeItemStack(itemstack1, 4 * 9, this.inventorySlots.size(), true))
-                {
+            if (slotIndex < (4 * 9)){
+                if (!this.mergeItemStack(itemstack1, 4 * 9, this.inventorySlots.size(), true)){
                     return null;
                 }
-            }
-            else if (!this.mergeItemStack(itemstack1, 0, 4 * 9, false))
-            {
+            }else if (!this.mergeItemStack(itemstack1, 0, 4 * 9, false)){
                 return null;
             }
 
-            if (itemstack1.stackSize == 0)
-            {
-                slot.putStack((ItemStack)null);
-            }
-            else
-            {
+            if (itemstack1.stackSize == 0){
+                slot.putStack((ItemStack) null);
+            }else{
                 slot.onSlotChanged();
             }
         }

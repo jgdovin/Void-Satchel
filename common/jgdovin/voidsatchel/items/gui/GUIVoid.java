@@ -29,13 +29,11 @@ public class GUIVoid extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
-        fontRenderer.drawString(
-                StatCollector.translateToLocal(itemVoid.getCustomName()), 10,
-                6, 0xffffff, false);
+        fontRenderer.drawString(StatCollector.translateToLocal(itemVoid.getCustomName()), 10, 6,
+                0xffffff, false);
         fontRenderer.drawString(StatCollector.translateToLocal("Items to Destroy"), 11,
                 (ySize - 112) + 2, 0xffffff, false);
-        fontRenderer.drawString(
-                StatCollector.translateToLocal(Archive.CONTAINER_INVENTORY), 15,
+        fontRenderer.drawString(StatCollector.translateToLocal(Archive.CONTAINER_INVENTORY), 15,
                 (ySize - 98) + 2, 0xffffff, false);
     }
 
